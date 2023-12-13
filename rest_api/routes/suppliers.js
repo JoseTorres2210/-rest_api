@@ -11,6 +11,7 @@ router.get('/findAll', function(req, res, next) {
     })
     .catch(error=>"error")
 });
+
 router.get('/findById/:id', function(req, res, next) {
 
     let id = parseInt(req.params.id);
@@ -27,6 +28,7 @@ router.get('/findById/:id', function(req, res, next) {
     })  
     .catch(error => res.status(400).send(error)) 
   });
+
 router.post('/save', function(req, res, next) { 
     let {SupplierName, ContactName, Address, City, PostalCode, Country, Phone} = req.body;
           
@@ -44,9 +46,11 @@ router.post('/save', function(req, res, next) {
     })  
     .catch(error => res.status(400).send(error)) 
   });
+
 router.put('/update/:id', function(req, res, next) { 
     res.send("PUT")
-});  
+}); 
+ 
 router.delete('/delete/:id', function(req, res, next) { 
     res.send("DELETE")
 });
