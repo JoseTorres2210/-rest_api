@@ -9,7 +9,7 @@ router.get('/findAll', function(req, res, next) {
     .then(data=> {
         res.json(data);
     })
-    .catch(error=> )
+    .catch(error=>"error")
 });
 router.get('/findById/:id', function(req, res, next) {
 
