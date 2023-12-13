@@ -9,7 +9,7 @@ router.get('/findAll', function(req, res, next) {
     .then(data=> {
         res.json(data);
     })
-    .catch(error=>"error")
+    .catch(error => res.status(400).send(error))
 });
 
 router.get('/findById/:id', function(req, res, next) {
@@ -48,11 +48,38 @@ router.post('/save', function(req, res, next) {
   });
 
 router.put('/update/:id', function(req, res, next) { 
-    res.send("PUT")
+    let {id,SupplierName, ContactName, Address, City, PostalCode, Country, Phone} = req.body;
+  
+    Suppliers.update({
+      SupplierName: SupplierName, 
+      ContactName: ContactName, 
+      Address: Address, 
+      City: City, 
+      PostalCode: PostalCode, 
+      Country: Country, 
+      Phone: Phone,
+      where: { 
+        id: parseInt(id)
+      }
+    })
+    .then(data => {  
+      res.json(data);  
+    })  
+    .catch(error => res.status(400).send(error)) 
 }); 
  
 router.delete('/delete/:id', function(req, res, next) { 
-    res.send("DELETE")
+  let id = parseInt(req.params.id);
+          
+  Suppliers.destroy({
+    where: { 
+      id: id
+    }
+  })
+  .then(data => {  
+  res.json(data);  
+})  
+.catch(error => res.status(400).send(error)) 
 });
 
 module.exports = router;
