@@ -5,11 +5,20 @@ const { Sequelize, Op } = require('sequelize');
 const Suppliers = require('../models').suppliers;
 
 router.get('/findAll', function(req, res, next) {
-    Suppliers.findAll({})
-    .then(data=> {
-        res.json(data);
-    })
-    .catch(error => res.status(400).send(error))
+
+  /* Verificador de autorización */
+
+  const { role } = req.user;
+
+  if (role !== process.env.ADMIN) {
+      return res.sendStatus(401);
+  }
+
+  Suppliers.findAll({})
+  .then(data=> {
+      res.json(data);
+  })
+  .catch(error => res.status(400).send(error))
 });
 
 router.get('/findById/:id', function(req, res, next) {
@@ -27,7 +36,7 @@ router.get('/findById/:id', function(req, res, next) {
         res.json(data);  
     })  
     .catch(error => res.status(400).send(error)) 
-  });
+});
 
 router.post('/save', function(req, res, next) { 
     let {SupplierName, ContactName, Address, City, PostalCode, Country, Phone} = req.body;
