@@ -16,8 +16,8 @@
   "production": {
     "username": "root",
     "password": "root",
-    "database": "northwind",
-    "host": "127.0.0.1",
+    "database": "railway",
+    "host": "restapi-production-945b.up.railway.app",
     "dialect": "mysql"
   }
 }
