@@ -9,7 +9,7 @@
   "schemes": [
     "http"
   ],
-  "host": "localhost:3002",
+  "host": "restapi-production-945b.up.railway.app",
 
   "securityDefinitions": {
     "ApiKeyAuth": {
