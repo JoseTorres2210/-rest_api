@@ -6,19 +6,18 @@ const Suppliers = require('../models').suppliers;
 
 router.get('/findAll', function(req, res, next) {
 
-  /* Verificador de autorización */
+    /* Verificador de autorización */
+    const { role } = req.user;
 
-  const { role } = req.user;
+    if (role !== process.env.ADMIN) {
+        return res.sendStatus(401);
+    }
 
-  if (role !== process.env.ADMIN) {
-      return res.sendStatus(401);
-  }
-
-  Suppliers.findAll({})
-  .then(data=> {
-      res.json(data);
-  })
-  .catch(error => res.status(400).send(error))
+    Suppliers.findAll({})
+    .then(data=> {
+        res.json(data);
+    })
+    .catch(error => res.status(400).send(error))
 });
 
 router.get('/findById/:id', function(req, res, next) {
@@ -54,7 +53,7 @@ router.post('/save', function(req, res, next) {
         res.json(data);  
     })  
     .catch(error => res.status(400).send(error)) 
-  });
+});
 
 router.put('/update/:id', function(req, res, next) { 
     let {id,SupplierName, ContactName, Address, City, PostalCode, Country, Phone} = req.body;
@@ -76,20 +75,19 @@ router.put('/update/:id', function(req, res, next) {
     })  
     .catch(error => res.status(400).send(error)) 
 }); 
- 
+
 router.delete('/delete/:id', function(req, res, next) { 
-  let id = parseInt(req.params.id);
-          
-  Suppliers.destroy({
-    where: { 
-      id: id
-    }
-  })
-  .then(data => {  
-  res.json(data);  
-})  
-.catch(error => res.status(400).send(error)) 
+    let id = parseInt(req.params.id);
+            
+    Suppliers.destroy({
+      where: { 
+        id: id
+      }
+    })
+    .then(data => {  
+    res.json(data);  
+  })  
+  .catch(error => res.status(400).send(error)) 
 });
 
 module.exports = router;
-

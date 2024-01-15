@@ -5,11 +5,12 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "localhost:3002",
   "basePath": "/",
   "schemes": [
     "http"
   ],
+  "host": "localhost:3002",
+
   "securityDefinitions": {
     "ApiKeyAuth": {
       "name": "jwt_token",
@@ -39,9 +40,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           }
         }
       }
@@ -77,25 +75,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "SupplierName": {
+                "email": {
                   "example": "any"
                 },
-                "ContactName": {
+                "username": {
                   "example": "any"
                 },
-                "Address": {
-                  "example": "any"
-                },
-                "City": {
-                  "example": "any"
-                },
-                "PostalCode": {
-                  "example": "any"
-                },
-                "Country": {
-                  "example": "any"
-                },
-                "Phone": {
+                "password": {
                   "example": "any"
                 }
               }
@@ -121,47 +107,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                },
-                "SupplierName": {
-                  "example": "any"
-                },
-                "ContactName": {
-                  "example": "any"
-                },
-                "Address": {
-                  "example": "any"
-                },
-                "City": {
-                  "example": "any"
-                },
-                "PostalCode": {
-                  "example": "any"
-                },
-                "Country": {
-                  "example": "any"
-                },
-                "Phone": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           }
         }
       }
@@ -175,6 +125,76 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/findAll/json": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/findById/{id}/json": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/update": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "username": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
